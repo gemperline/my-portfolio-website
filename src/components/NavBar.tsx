@@ -1,18 +1,18 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import Link from "next/link";
-import { Menu, X } from "lucide-react"; // icon library
+import { useState } from 'react'
+import Link from 'next/link'
+import { Menu, X } from 'lucide-react' // icon library
 
 const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "#projects" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
-];
+  { label: 'Home', href: '/' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'About', href: '#about' },
+  { label: 'Contact', href: '#contact' },
+]
 
 export default function NavBar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
     <nav className="w-full fixed top-0 z-50 bg-[#16161a] border-b border-[#2c2c38]">
@@ -59,5 +59,5 @@ export default function NavBar() {
         </div>
       )}
     </nav>
-  );
+  )
 }

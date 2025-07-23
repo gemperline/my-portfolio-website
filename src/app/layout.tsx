@@ -1,23 +1,29 @@
-import "./globals.css";
-import NavBar from "@/components/NavBar";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import './globals.css'
+import NavBar from '@/components/NavBar'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   icons: {
-    icon: "/ag-logo-white-abstract.svg",
+    icon: '/ag-logo-white-abstract.svg',
   },
-  title: "Adam Gemperline | Software Engineer",
+  title: 'Adam Gemperline | Software Engineer',
   description:
-    "Portfolio of Adam Gemperline, a software engineer specializing in sleek, performant web applications.",
-};
+    'Portfolio of Adam Gemperline, a software engineer specializing in sleek, performant web applications.',
+}
+const temp = {
+  title: 'Adam Gemperline | Software Engineer',
+  description:
+    'Portfolio of Adam Gemperline, a software engineer specializing in sleek, performant web applications.',
+  test: 'test',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en" className="dark">
@@ -26,5 +32,5 @@ export default function RootLayout({
         <div className="pt-[64px]">{children}</div>
       </body>
     </html>
-  );
+  )
 }
