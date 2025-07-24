@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
 
 export default function ProjectCard({
   title,
@@ -56,7 +55,7 @@ export default function ProjectCard({
           className={`absolute inset-0 bg-gray-700 flex items-center justify-center transform transition-transform duration-500 ${(!imagePaths.length || imagePaths.length === 1) && 'group-hover:scale-105'}`}
         >
           {isLocked ? (
-            <Image
+            <img
               key="privacy-lock-1"
               src="/privacy-lock-white.svg"
               alt="Privacy Lock"
@@ -64,7 +63,7 @@ export default function ProjectCard({
             />
           ) : (
             imagePaths.map((src, idx) => (
-              <Image
+              <img
                 key={idx}
                 src={src}
                 alt={`Project screenshot ${idx + 1}`}
@@ -96,7 +95,7 @@ export default function ProjectCard({
           {toolkitIconsPaths.slice(0, 4).map((src, idx) => (
             <div key={idx} className="w-6 h-6 text-white">
               {/* TODO: on hover, slide icons to right and display helper text */}
-              <Image
+              <img
                 key={`${src}-${idx}`}
                 src={src}
                 alt={`Toolkit icon ${idx + 1}`}
