@@ -25,7 +25,7 @@ export default function RootLayout({
         className={`${inter.className} bg-background dark:bg-white text-text`}
       >
         <NavBar />
-        <div className="pt-[64px]">{children}</div>
+        <div className="pt-[50px]">{children}</div>
       </body>
     </html>
   )
