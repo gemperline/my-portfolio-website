@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import ConfettiExplosion from 'react-confetti-explosion'
 import ProjectCard from '@/components/ProjectCard'
-import { s } from 'framer-motion/client'
 
 export default function Home() {
   const [isClicked, setIsClicked] = useState(false)
@@ -34,14 +33,14 @@ export default function Home() {
             id="hero-name"
             className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight select-none"
           >
-            Hey, I’m{' '}
+            Hey, I&rsquo;m{' '}
             <span className="text-primary select-all">Adam Gemperline</span>
           </h1>
 
           {/* marker div below is needed for NavBar name trigger on scroll */}
           <div id="name-marker" className="h-[1px] w-full" />
           <p className="text-lg sm:text-xl text-gray-400 max-w-xl mx-auto select-none">
-            I’m a software engineer who builds modern, elegant apps using clean
+            I&rsquo;m a software engineer who builds modern, elegant apps using clean
             code, smart design, and a bit of flair.
           </p>
 
@@ -98,7 +97,7 @@ export default function Home() {
         <div className="text-center space-y-4">
           <h2 className="text-3xl sm:text-4xl font-bold">My Projects</h2>
           <p className="text-gray-400 max-w-lg mx-auto">
-            Here's a few things I've worked on recently.
+            Here&rsquo;s a few things I&rsquo;ve worked on recently.
           </p>
         </div>
 
