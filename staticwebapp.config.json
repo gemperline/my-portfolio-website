@@ -15,6 +15,15 @@
   ],
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/static/*", "/_next/*"]
+    "exclude": [
+      "/_next/*",
+      "/static/*",
+      "/*.svg",
+      "/*.png",
+      "/*.jpg",
+      "/*.ico",
+      "/*.webp",
+      "/*.woff2"
+    ]
   }
 }
