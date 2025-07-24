@@ -1,13 +1,19 @@
 {
   "routes": [
     {
+      "route": "/_next/*",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
       "route": "/*",
       "headers": {
-        "Cache-Control": "no-store"
+        "Cache-Control": "no-cache"
       }
     }
   ],
-    "navigationFallback": {
+  "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": ["/static/*", "/_next/*"]
   }
