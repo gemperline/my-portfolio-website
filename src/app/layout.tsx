@@ -13,12 +13,6 @@ export const metadata: Metadata = {
   description:
     'Portfolio of Adam Gemperline, a software engineer specializing in sleek, performant web applications.',
 }
-const temp = {
-  title: 'Adam Gemperline | Software Engineer',
-  description:
-    'Portfolio of Adam Gemperline, a software engineer specializing in sleek, performant web applications.',
-  test: 'test',
-}
 
 export default function RootLayout({
   children,
@@ -27,9 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className} bg-background text-text`}>
+      <body
+        className={`${inter.className} bg-background dark:bg-white text-text`}
+      >
         <NavBar />
-        <div className="pt-[64px]">{children}</div>
+        <div className="pt-[50px]">{children}</div>
       </body>
     </html>
   )
