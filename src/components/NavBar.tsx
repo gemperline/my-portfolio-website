@@ -20,50 +20,49 @@ export default function NavBar() {
 
   useEffect(() => {
     const heroNameEl = document.getElementById('hero-name')
-    if (!heroNameEl) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setShowName(!entry.isIntersecting)
-      },
-      { root: null, threshold: 1.0 }
-    )
-
-    observer.observe(heroNameEl)
-
-    return () => observer.disconnect()
-  }, [])
+    const navEl = document.querySelector('nav')
+  
+    if (!heroNameEl || !navEl) return
+  
+    const onScroll = () => {
+      const heroRect = heroNameEl.getBoundingClientRect()
+      const navRect = navEl.getBoundingClientRect()
+      const heroCenterY = heroRect.top + heroRect.height / 2
+      const navCenterY = navRect.top + navRect.height / 2
+  
+      setShowName(heroCenterY <= navCenterY)
+    }
+  
+    onScroll()
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])  
 
   return (
     <motion.nav
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="w-full fixed top-0 z-50 bg-background border-b border-[#2c2c38]"
+      className="relative w-full fixed top-0 z-50 bg-background border-b border-[#2c2c38]"
     >
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Sliding name */}
-        <div className="w-[180px]">
+        <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
           <AnimatePresence>
-            <div className="h-[24px] overflow-hidden flex items-center">
+            {showName && (
               <motion.button
                 onClick={() =>
-                  window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth',
-                  })
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
                 }
-                initial={false}
-                animate={{
-                  opacity: showName ? 1 : 0,
-                  y: showName ? 0 : 10,
-                }}
-                transition={{ duration: 0.4 }}
-                className="text-xl font-bold text-primary select-none cursor-pointer"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.3 }}
+                className="text-xl font-bold text-primary select-none cursor-pointer pointer-events-auto"
               >
                 Adam Gemperline
               </motion.button>
-            </div>
+            )}
           </AnimatePresence>
         </div>
 

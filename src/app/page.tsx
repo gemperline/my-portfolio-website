@@ -5,19 +5,21 @@ import { useEffect, useState } from 'react'
 import ConfettiExplosion from 'react-confetti-explosion'
 import ProjectCard from '@/components/ProjectCard'
 
+import { useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
+import { useRef } from 'react'
+
 export default function Home() {
   const [isClicked, setIsClicked] = useState(false)
   const [emailClicked, setEmailClicked] = useState(false)
 
-  useEffect(() => {
-    if (isClicked) {
-      const timeout = setTimeout(() => {
-        setIsClicked(false)
-      }, 3000)
+  const heroNameRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: heroNameRef,
+    offset: ['start end', 'end start'], // from top of hero to top of viewport
+  })
 
-      return () => clearTimeout(timeout) // Cleanup on unmount
-    }
-  }, [isClicked])
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.6])
+  const yOffset = useTransform(scrollYProgress, [0, 0.5], [0, -10])
 
   return (
     <>
@@ -31,10 +33,16 @@ export default function Home() {
         >
           <h1
             id="hero-name"
+            ref={heroNameRef}
             className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight select-none"
           >
             Hey, I&rsquo;m{' '}
-            <span className="text-primary select-all">Adam Gemperline</span>
+            <motion.span
+              className="text-primary select-all inline-block origin-left"
+              style={{ scale, y: yOffset }}
+            >
+              Adam Gemperline
+            </motion.span>
           </h1>
 
           {/* marker div below is needed for NavBar name trigger on scroll */}
