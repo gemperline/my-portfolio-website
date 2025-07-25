@@ -40,8 +40,8 @@ export default function Home() {
           {/* marker div below is needed for NavBar name trigger on scroll */}
           <div id="name-marker" className="h-[1px] w-full" />
           <p className="text-lg sm:text-xl text-gray-400 max-w-xl mx-auto select-none">
-            I&rsquo;m a software engineer who builds modern, elegant apps using clean
-            code, smart design, and a bit of flair.
+            I&rsquo;m a software engineer who builds modern, elegant apps using
+            clean code, smart design, and a bit of flair.
           </p>
 
           <div className="relative inline-block h-[50px] w-[180px]">
@@ -141,7 +141,7 @@ export default function Home() {
           <ProjectCard
             title="Social Media App"
             description="A social media platform for connecting with friends and sharing content"
-            imagePaths={['/social-home.jpg']}
+            imagePaths={['/social-home.png']}
             toolkitIconsPaths={[
               '/react-icon.svg',
               '/nodejs.svg',
