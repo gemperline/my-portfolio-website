@@ -1,23 +1,17 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import ConfettiExplosion from 'react-confetti-explosion'
 import ProjectCard from '@/components/ProjectCard'
+import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion'
+import { useRef } from 'react'
 
 export default function Home() {
   const [isClicked, setIsClicked] = useState(false)
   const [emailClicked, setEmailClicked] = useState(false)
-
-  useEffect(() => {
-    if (isClicked) {
-      const timeout = setTimeout(() => {
-        setIsClicked(false)
-      }, 3000)
-
-      return () => clearTimeout(timeout) // Cleanup on unmount
-    }
-  }, [isClicked])
+  const heroNameRef = useRef(null)
+  const { scrollYProgress } = useScroll()
+  const scale = useTransform(scrollYProgress, [0, 0.15], [1, 0.6])
 
   return (
     <>
@@ -29,13 +23,14 @@ export default function Home() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="text-center space-y-6"
         >
-          <h1
+          <motion.h1
             id="hero-name"
-            className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight select-none"
+            style={{ scale }}
+            className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight select-none origin-top"
           >
-            Hey, I&rsquo;m{' '}
+            Hey, I&rsquo;m <br className="block sm:hidden" />
             <span className="text-primary select-all">Adam Gemperline</span>
-          </h1>
+          </motion.h1>
 
           {/* marker div below is needed for NavBar name trigger on scroll */}
           <div id="name-marker" className="h-[1px] w-full" />
@@ -111,6 +106,7 @@ export default function Home() {
               '/typescript-def.svg',
               '/tailwindcss.svg',
             ]}
+            repoUrl='https://github.com/gemperline/my-portfolio-website'
           />
           <ProjectCard
             title="Luxury Furniture Store"
@@ -122,7 +118,7 @@ export default function Home() {
             ]}
             tall={true}
             toolkitIconsPaths={[
-              '/nextjs-icon-white-filled.svg',
+              '/react-icon.svg',
               '/typescript-def.svg',
               '/nestjs.svg',
               '/postgresql.svg',
@@ -132,11 +128,22 @@ export default function Home() {
             title="Modular AI Agent Infrastructure"
             description="A modular platform for deploying, tasking, and managing multi-agentic workforces."
             isLocked={true}
+            toolkitIconsPaths={[
+              '/csharpIcon.svg',
+              '/react-icon.svg',
+              '/azureai-color.svg',
+            ]}
           />
           <ProjectCard
             title="Healthcare Staffing Platform"
             description="Helped an industry leader streamline staffing through a robust, automated web platform."
             isLocked={true}
+            toolkitIconsPaths={[
+              '/react-icon.svg',
+              '/csharpIcon.svg',
+              '/azure.svg',
+              '/sql-light.svg',
+            ]}
           />
           <ProjectCard
             title="Social Media App"
@@ -147,6 +154,7 @@ export default function Home() {
               '/nodejs.svg',
               '/firebase.png',
             ]}
+            repoUrl='https://github.com/gemperline/Twitter-esque-Social-App'
           />
         </div>
       </section>

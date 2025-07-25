@@ -11,6 +11,7 @@ export default function ProjectCard({
   isLocked = false,
   toolkitIconsPaths = [],
   tall = false,
+  repoUrl,
 }: {
   title: string
   description: string
@@ -18,6 +19,7 @@ export default function ProjectCard({
   isLocked?: boolean
   toolkitIconsPaths?: string[]
   tall?: boolean
+  repoUrl?: string
 }) {
   const [currentImage, setCurrentImage] = useState(0)
   const [hovering, setHovering] = useState(false)
@@ -85,15 +87,20 @@ export default function ProjectCard({
 
       {/* Footer */}
       <div className="flex items-center justify-between px-6 py-4 border-t border-[#2c2c38] bg-[#181825]">
-        {isLocked ? (
+        {isLocked || !repoUrl ? (
           <div className="text-gray-500 flex items-center space-x-2">
-            React out for details
+            Reach out for details
           </div>
         ) : (
           //  TODO: link to project repo, or display above statement if not available
-          <button className="text-primary hover:underline font-medium cursor-pointer">
+          <a
+            href={repoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:underline font-medium cursor-pointer"
+          >
             View Project →
-          </button>
+          </a>
         )}
         <div className="flex space-x-3">
           {toolkitIconsPaths.slice(0, 4).map((src, idx) => (
