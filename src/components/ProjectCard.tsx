@@ -60,6 +60,8 @@ export default function ProjectCard({
               key="privacy-lock-1"
               src="/privacy-lock-white.svg"
               alt="Privacy Lock"
+              width={64}
+              height={64}
               className="w-30 h-30"
             />
           ) : (
@@ -68,6 +70,7 @@ export default function ProjectCard({
                 key={idx}
                 src={src}
                 alt={`Project screenshot ${idx + 1}`}
+                fill
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${idx === currentImage ? 'opacity-100' : 'opacity-0'}`}
               />
             ))
@@ -100,6 +103,8 @@ export default function ProjectCard({
                 key={`${src}-${idx}`}
                 src={src}
                 alt={`Toolkit icon ${idx + 1}`}
+                width={24}
+                height={24}
                 className="w-6 h-6"
               />
             </div>
