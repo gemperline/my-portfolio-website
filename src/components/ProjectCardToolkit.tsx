@@ -51,7 +51,7 @@ export function ProjectCardToolkit({
         return (
           <motion.div
             key={idx}
-            className="flex items-center overflow-hidden z-10 rounded basis-[24px] bg-[#25181f]"
+            className="flex items-center overflow-hidden z-10 rounded basis-[24px] bg-[#181825]"
             onMouseEnter={() => handleMouseEnter(idx)}
             onMouseLeave={() => setHoveredIndex(null)}
             animate={{
