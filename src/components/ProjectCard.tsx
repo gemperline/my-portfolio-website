@@ -3,11 +3,12 @@
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { ProjectCardToolkit } from './ProjectCardToolkit'
 
 export default function ProjectCard({
   title,
   description,
-  imagePaths = [],
+  images = [],
   isLocked = false,
   toolkitIconsPaths = [],
   tall = false,
@@ -15,23 +16,22 @@ export default function ProjectCard({
 }: {
   title: string
   description: string
-  imagePaths?: string[]
+  images?: { src: string; priority?: boolean }[]
   isLocked?: boolean
-  toolkitIconsPaths?: string[]
+  toolkitIconsPaths?: { src: string; label: string }[]
   tall?: boolean
   repoUrl?: string
 }) {
   const [currentImage, setCurrentImage] = useState(0)
-  const [hovering, setHovering] = useState(false)
 
   useEffect(() => {
-    if (hovering && imagePaths.length > 1) {
+    if (images.length > 1) {
       const interval = setInterval(() => {
-        setCurrentImage((prev) => (prev + 1) % imagePaths.length)
-      }, 2000)
+        setCurrentImage((prev) => (prev + 1) % images.length)
+      }, 5000)
       return () => clearInterval(interval)
     }
-  }, [hovering, imagePaths])
+  }, [images.length])
 
   return (
     <motion.div
@@ -40,22 +40,13 @@ export default function ProjectCard({
       transition={{ duration: 0.8, ease: 'easeInOut' }}
       viewport={{ once: true, amount: 0.2 }}
       className={`group rounded-xl border border-[#2c2c38] overflow-hidden shadow-md bg-[#1e1e2f] transition-shadow hover:shadow-lg flex flex-col ${tall ? 'row-span-2' : ''}`}
-      onMouseEnter={() => {
-        setHovering(true)
-        if (imagePaths.length > 1) {
-          setCurrentImage((prev) => (prev + 1) % imagePaths.length)
-        }
-      }}
-      onMouseLeave={() => {
-        setHovering(false)
-      }}
     >
       {/* Image Container */}
       <div
         className={`relative overflow-hidden ${tall ? 'aspect-[9/19.5]' : 'h-48'}`}
       >
         <div
-          className={`absolute inset-0 bg-gray-700 flex items-center justify-center transform transition-transform duration-500 ${(!imagePaths.length || imagePaths.length === 1) && 'group-hover:scale-105'}`}
+          className={`absolute inset-0 bg-gray-700 flex items-center justify-center transform transition-transform duration-500 group-hover:scale-105`}
         >
           {isLocked ? (
             <Image
@@ -67,12 +58,14 @@ export default function ProjectCard({
               className="w-30 h-30"
             />
           ) : (
-            imagePaths.map((src, idx) => (
+            images.map((image, idx) => (
               <Image
                 key={idx}
-                src={src}
+                src={image.src}
+                priority={!!image.priority}
                 alt={`Project screenshot ${idx + 1}`}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${idx === currentImage ? 'opacity-100' : 'opacity-0'}`}
               />
             ))
@@ -86,36 +79,23 @@ export default function ProjectCard({
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between px-6 py-4 border-t border-[#2c2c38] bg-[#181825]">
-        {isLocked || !repoUrl ? (
-          <div className="text-gray-500 flex items-center space-x-2">
-            Reach out for details
+      <div className="flex items-center  justify-between px-6 py-4 border-t border-[#2c2c38] bg-[#181825]">
+        <div className="w-full text-gray-500 flex items-center space-x-2">
+          {isLocked || !repoUrl ? (
+            <p className="-z-0 absolute select-none">Reach out for details</p>
+          ) : (
+            <a
+              href={repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute select-none -z-0 not-last:text-primary hover:underline font-medium cursor-pointer"
+            >
+              View Project →
+            </a>
+          )}
+          <div className="w-full flex items-center justify-end">
+            <ProjectCardToolkit icons={toolkitIconsPaths} />
           </div>
-        ) : (
-          //  TODO: link to project repo, or display above statement if not available
-          <a
-            href={repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary hover:underline font-medium cursor-pointer"
-          >
-            View Project →
-          </a>
-        )}
-        <div className="flex space-x-3">
-          {toolkitIconsPaths.slice(0, 4).map((src, idx) => (
-            <div key={idx} className="w-6 h-6 text-white">
-              {/* TODO: on hover, slide icons to right and display helper text */}
-              <Image
-                key={`${src}-${idx}`}
-                src={src}
-                alt={`Toolkit icon ${idx + 1}`}
-                width={24}
-                height={24}
-                className="w-6 h-6"
-              />
-            </div>
-          ))}
         </div>
       </div>
     </motion.div>
