@@ -61,8 +61,14 @@ export function ProjectCardToolkit({
             }}
             transition={{ duration: 0.3 }}
           >
-            <div className="h-6 flex items-center justify-center shrink-0">
-              <Image src={src} alt={label} width={24} height={24} />
+            <div className="relative w-6 h-6 shrink-0">
+              <Image
+                src={src}
+                alt={label}
+                fill
+                className="object-contain"
+                sizes="24px"
+              />
             </div>
 
             <div

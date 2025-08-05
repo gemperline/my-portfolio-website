@@ -8,7 +8,7 @@ import { ProjectCardToolkit } from './ProjectCardToolkit'
 export default function ProjectCard({
   title,
   description,
-  imagePaths = [],
+  images = [],
   isLocked = false,
   toolkitIconsPaths = [],
   tall = false,
@@ -16,7 +16,7 @@ export default function ProjectCard({
 }: {
   title: string
   description: string
-  imagePaths?: string[]
+  images?: { src: string; priority?: boolean }[]
   isLocked?: boolean
   toolkitIconsPaths?: { src: string; label: string }[]
   tall?: boolean
@@ -25,13 +25,13 @@ export default function ProjectCard({
   const [currentImage, setCurrentImage] = useState(0)
 
   useEffect(() => {
-    if (imagePaths.length > 1) {
+    if (images.length > 1) {
       const interval = setInterval(() => {
-        setCurrentImage((prev) => (prev + 1) % imagePaths.length)
+        setCurrentImage((prev) => (prev + 1) % images.length)
       }, 5000)
       return () => clearInterval(interval)
     }
-  }, [imagePaths.length])
+  }, [images.length])
 
   return (
     <motion.div
@@ -58,12 +58,14 @@ export default function ProjectCard({
               className="w-30 h-30"
             />
           ) : (
-            imagePaths.map((src, idx) => (
+            images.map((image, idx) => (
               <Image
                 key={idx}
-                src={src}
+                src={image.src}
+                priority={!!image.priority}
                 alt={`Project screenshot ${idx + 1}`}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${idx === currentImage ? 'opacity-100' : 'opacity-0'}`}
               />
             ))

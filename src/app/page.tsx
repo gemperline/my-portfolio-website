@@ -100,7 +100,7 @@ export default function Home() {
           <ProjectCard
             title="This Website"
             description="My personal site to showcase my work, style, and creativity."
-            imagePaths={['/this-website.png']}
+            images={[{ src: '/this-website.png' }]}
             toolkitIconsPaths={[
               { src: '/nextjs-icon-white-filled.svg', label: 'Next.js' },
               { src: '/typescript-def.svg', label: 'TypeScript' },
@@ -111,14 +111,14 @@ export default function Home() {
           <ProjectCard
             title="Luxury Furniture Store"
             description="A masterpiece in progress. Mobile-first, sleek e-commerce site with a reusable design."
-            imagePaths={[
-              '/furniture-store-mobile-landing.png',
-              '/furniture-store-mobile-products.png',
-              '/furniture-store-mobile-product.png',
+            images={[
+              { src: '/furniture-store-mobile-landing.png', priority: true },
+              { src: '/furniture-store-mobile-products.png' },
+              { src: '/furniture-store-mobile-product.png' },
             ]}
             tall={true}
             toolkitIconsPaths={[
-              { src: '/nextjs-icon-white-filled.svg', label: 'Next.js' },
+              { src: '/react-icon.svg', label: 'React' },
               { src: '/typescript-def.svg', label: 'TypeScript' },
               { src: '/nestjs.svg', label: 'Nest.js' },
               { src: '/postgresql.svg', label: 'PostgreSQL' },
@@ -130,7 +130,7 @@ export default function Home() {
             isLocked={true}
             toolkitIconsPaths={[
               { src: '/csharpIcon.svg', label: 'C#' },
-              { src: '/react-icon.svg', label: 'React.js' },
+              { src: '/react-icon.svg', label: 'React' },
               { src: '/azureai-color.svg', label: 'Azure AI Foundry' },
             ]}
           />
@@ -139,7 +139,7 @@ export default function Home() {
             description="Helped an industry leader streamline staffing through a robust, automated web platform."
             isLocked={true}
             toolkitIconsPaths={[
-              { src: '/react-icon.svg', label: 'React.js' },
+              { src: '/react-icon.svg', label: 'React' },
               { src: '/csharpIcon.svg', label: 'C#' },
               { src: '/azure.svg', label: 'Azure' },
               { src: '/sql-light.svg', label: 'SQL' },
@@ -148,9 +148,9 @@ export default function Home() {
           <ProjectCard
             title="Social Media App"
             description="A social media platform for connecting with friends and sharing content"
-            imagePaths={['/social-home.png']}
+            images={[{ src: '/social-home.png' }]}
             toolkitIconsPaths={[
-              { src: '/react-icon.svg', label: 'React.js' },
+              { src: '/react-icon.svg', label: 'React' },
               { src: '/nodejs.svg', label: 'Node.js' },
               { src: '/firebase.png', label: 'Firebase' },
             ]}
