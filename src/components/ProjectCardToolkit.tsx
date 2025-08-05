@@ -12,11 +12,22 @@ export function ProjectCardToolkit({
   const labelRefs = useRef<(HTMLDivElement | null)[]>([])
   const animatingIcons = useRef<Set<number>>(new Set())
 
-  // after first render, store all label widths
+  // --- Prevent hydration mismatch ---
+  const [hasMounted, setHasMounted] = useState(false)
+
   useEffect(() => {
-    const widths = labelRefs.current.map((el) => el?.offsetWidth ?? 0)
-    setLabelWidths(widths)
-  }, [icons])
+    setHasMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (hasMounted) {
+      const widths = labelRefs.current.map((el) => el?.offsetWidth ?? 0)
+      setLabelWidths(widths)
+    }
+  }, [icons, hasMounted])
+
+  // --- Skip rendering on server ---
+  if (!hasMounted) return null
 
   const handleMouseEnter = (idx: number) => {
     if (animatingIcons.current.has(idx)) return
@@ -36,10 +47,11 @@ export function ProjectCardToolkit({
         const labelWidth = labelWidths[idx] ?? 0
         const baseWidth = 24
         const spacing = 8
+
         return (
           <motion.div
             key={idx}
-            className="flex items-center overflow-hidden z-10 bg-[#181825] rounded basis-[24px]"
+            className="flex items-center overflow-hidden z-10 rounded basis-[24px] bg-[#25181f]"
             onMouseEnter={() => handleMouseEnter(idx)}
             onMouseLeave={() => setHoveredIndex(null)}
             animate={{
@@ -52,6 +64,7 @@ export function ProjectCardToolkit({
             <div className="h-6 flex items-center justify-center shrink-0">
               <Image src={src} alt={label} width={24} height={24} />
             </div>
+
             <div
               ref={(el) => {
                 labelRefs.current[idx] = el
