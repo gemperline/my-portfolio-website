@@ -102,11 +102,11 @@ export default function Home() {
             description="My personal site to showcase my work, style, and creativity."
             imagePaths={['/this-website.png']}
             toolkitIconsPaths={[
-              '/nextjs-icon-white-filled.svg',
-              '/typescript-def.svg',
-              '/tailwindcss.svg',
+              { src: '/nextjs-icon-white-filled.svg', label: 'Next.js' },
+              { src: '/typescript-def.svg', label: 'TypeScript' },
+              { src: '/tailwindcss.svg', label: 'Tailwind CSS' },
             ]}
-            repoUrl='https://github.com/gemperline/my-portfolio-website'
+            repoUrl="https://github.com/gemperline/my-portfolio-website"
           />
           <ProjectCard
             title="Luxury Furniture Store"
@@ -118,10 +118,10 @@ export default function Home() {
             ]}
             tall={true}
             toolkitIconsPaths={[
-              '/react-icon.svg',
-              '/typescript-def.svg',
-              '/nestjs.svg',
-              '/postgresql.svg',
+              { src: '/nextjs-icon-white-filled.svg', label: 'Next.js' },
+              { src: '/typescript-def.svg', label: 'TypeScript' },
+              { src: '/nestjs.svg', label: 'Nest.js' },
+              { src: '/postgresql.svg', label: 'PostgreSQL' },
             ]}
           />
           <ProjectCard
@@ -129,9 +129,9 @@ export default function Home() {
             description="A modular platform for deploying, tasking, and managing multi-agentic workforces."
             isLocked={true}
             toolkitIconsPaths={[
-              '/csharpIcon.svg',
-              '/react-icon.svg',
-              '/azureai-color.svg',
+              { src: '/csharpIcon.svg', label: 'C#' },
+              { src: '/react-icon.svg', label: 'React.js' },
+              { src: '/azureai-color.svg', label: 'Azure AI Foundry' },
             ]}
           />
           <ProjectCard
@@ -139,10 +139,10 @@ export default function Home() {
             description="Helped an industry leader streamline staffing through a robust, automated web platform."
             isLocked={true}
             toolkitIconsPaths={[
-              '/react-icon.svg',
-              '/csharpIcon.svg',
-              '/azure.svg',
-              '/sql-light.svg',
+              { src: '/react-icon.svg', label: 'React.js' },
+              { src: '/csharpIcon.svg', label: 'C#' },
+              { src: '/azure.svg', label: 'Azure' },
+              { src: '/sql-light.svg', label: 'SQL' },
             ]}
           />
           <ProjectCard
@@ -150,11 +150,11 @@ export default function Home() {
             description="A social media platform for connecting with friends and sharing content"
             imagePaths={['/social-home.png']}
             toolkitIconsPaths={[
-              '/react-icon.svg',
-              '/nodejs.svg',
-              '/firebase.png',
+              { src: '/react-icon.svg', label: 'React.js' },
+              { src: '/nodejs.svg', label: 'Node.js' },
+              { src: '/firebase.png', label: 'Firebase' },
             ]}
-            repoUrl='https://github.com/gemperline/Twitter-esque-Social-App'
+            repoUrl="https://github.com/gemperline/Twitter-esque-Social-App"
           />
         </div>
       </section>

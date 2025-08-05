@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { ProjectCardToolkit } from './ProjectCardToolkit'
 
 export default function ProjectCard({
   title,
@@ -17,12 +18,13 @@ export default function ProjectCard({
   description: string
   imagePaths?: string[]
   isLocked?: boolean
-  toolkitIconsPaths?: string[]
+  toolkitIconsPaths?: { src: string; label: string }[]
   tall?: boolean
   repoUrl?: string
 }) {
   const [currentImage, setCurrentImage] = useState(0)
   const [hovering, setHovering] = useState(false)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   useEffect(() => {
     if (hovering && imagePaths.length > 1) {
@@ -86,36 +88,23 @@ export default function ProjectCard({
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between px-6 py-4 border-t border-[#2c2c38] bg-[#181825]">
-        {isLocked || !repoUrl ? (
-          <div className="text-gray-500 flex items-center space-x-2">
-            Reach out for details
+      <div className="flex items-center  justify-between px-6 py-4 border-t border-[#2c2c38] bg-[#181825]">
+        <div className="w-full text-gray-500 flex items-center space-x-2">
+          {isLocked || !repoUrl ? (
+            <p className="-z-0 absolute">Reach out for details</p>
+          ) : (
+            <a
+              href={repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute -z-0 not-last:text-primary hover:underline font-medium cursor-pointer"
+            >
+              View Project →
+            </a>
+          )}
+          <div className="w-full flex items-center justify-end">
+            <ProjectCardToolkit icons={toolkitIconsPaths} />
           </div>
-        ) : (
-          //  TODO: link to project repo, or display above statement if not available
-          <a
-            href={repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary hover:underline font-medium cursor-pointer"
-          >
-            View Project →
-          </a>
-        )}
-        <div className="flex space-x-3">
-          {toolkitIconsPaths.slice(0, 4).map((src, idx) => (
-            <div key={idx} className="w-6 h-6 text-white">
-              {/* TODO: on hover, slide icons to right and display helper text */}
-              <Image
-                key={`${src}-${idx}`}
-                src={src}
-                alt={`Toolkit icon ${idx + 1}`}
-                width={24}
-                height={24}
-                className="w-6 h-6"
-              />
-            </div>
-          ))}
         </div>
       </div>
     </motion.div>
