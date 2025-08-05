@@ -12,7 +12,7 @@ export function ProjectCardToolkit({
   const labelRefs = useRef<(HTMLDivElement | null)[]>([])
   const animatingIcons = useRef<Set<number>>(new Set())
 
-  // After first render, store all label widths
+  // after first render, store all label widths
   useEffect(() => {
     const widths = labelRefs.current.map((el) => el?.offsetWidth ?? 0)
     setLabelWidths(widths)
@@ -35,8 +35,7 @@ export function ProjectCardToolkit({
         const isHovered = hoveredIndex === idx
         const labelWidth = labelWidths[idx] ?? 0
         const baseWidth = 24
-        const spacing = 8 // ml-2 (0.5rem)
-
+        const spacing = 8
         return (
           <motion.div
             key={idx}
@@ -50,17 +49,14 @@ export function ProjectCardToolkit({
             }}
             transition={{ duration: 0.3 }}
           >
-            {/* Icon */}
             <div className="h-6 flex items-center justify-center shrink-0">
               <Image src={src} alt={label} width={24} height={24} />
             </div>
-
-            {/* Label */}
             <div
               ref={(el) => {
                 labelRefs.current[idx] = el
               }}
-              className={`ml-2 whitespace-nowrap text-sm text-white transition-opacity duration-200 ${
+              className={`ml-2 whitespace-nowrap text-sm text-white select-none transition-opacity duration-200 ${
                 isHovered ? 'opacity-100' : 'opacity-0'
               }`}
             >
