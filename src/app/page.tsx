@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import ConfettiExplosion from 'react-confetti-explosion'
 import ProjectCard from '@/components/ProjectCard'
-import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 
 export default function Home() {
@@ -105,6 +105,7 @@ export default function Home() {
               { src: '/nextjs-icon-white-filled.svg', label: 'Next.js' },
               { src: '/typescript-def.svg', label: 'TypeScript' },
               { src: '/tailwindcss.svg', label: 'Tailwind CSS' },
+              { src: '/vercel.svg', label: 'Vercel' },
             ]}
             repoUrl="https://github.com/gemperline/my-portfolio-website"
           />
